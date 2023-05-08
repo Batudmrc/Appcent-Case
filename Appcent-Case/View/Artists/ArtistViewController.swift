@@ -27,6 +27,11 @@ class ArtistViewController: UIViewController {
         
         collectionView.register(UINib(nibName: CategoriesCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: CategoriesCollectionViewCell.identifier)
         
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 1
+        collectionView.collectionViewLayout = layout
+        
         fetchData()
         // Do any additional setup after loading the view.
     }
@@ -58,8 +63,6 @@ class ArtistViewController: UIViewController {
         let artist = artists[indexPath.item]
         let genreId = artist.id
         artistId = String(artist.id)
-        print(artistId!)
-        //genreName = category.name
         
         guard URL(string: "https://api.deezer.com/genre/\(genreId)/artists") != nil else {
             return
@@ -78,7 +81,7 @@ class ArtistViewController: UIViewController {
     }
 }
 
-extension ArtistViewController: UICollectionViewDelegate,UICollectionViewDataSource {
+extension ArtistViewController: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return artists.count
     }
@@ -88,4 +91,12 @@ extension ArtistViewController: UICollectionViewDelegate,UICollectionViewDataSou
         cell.setup(category: artist)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            let collectionViewWidth = collectionView.bounds.width
+            let cellWidth = collectionViewWidth / 2 // Two cells per line
+            let cellHeight: CGFloat = 180 // Specify the desired height
+
+            return CGSize(width: cellWidth, height: cellHeight)
+        }
 }
