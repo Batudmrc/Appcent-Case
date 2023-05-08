@@ -68,7 +68,7 @@ class ArtistViewController: UIViewController {
 
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "artistVC" {
+        if segue.identifier == "albumsVC" {
             if let genreId = sender as? Int, let destinationVC = segue.destination as? AlbumsViewController {
                 // Pass the genre ID to the destination view controller
                 destinationVC.artistId = String(genreId)

@@ -18,6 +18,7 @@ class AlbumsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = artistName
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsVerticalScrollIndicator = false
@@ -29,7 +30,7 @@ class AlbumsViewController: UIViewController {
     }
     
     func fetchData() {
-        guard let url = URL(string: "https://api.deezer.com/artist/\(artistId)") else {
+        guard let url = URL(string: "https://api.deezer.com/artist/\(artistId!)/albums") else {
             return
         }
         let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
@@ -38,6 +39,7 @@ class AlbumsViewController: UIViewController {
                 return
             }
             do {
+
                 let album = try JSONDecoder().decode(Album.self, from: data)
                 self?.albums = album.data
                 
