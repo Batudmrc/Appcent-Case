@@ -12,6 +12,8 @@ class AlbumsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var releaseDate: UILabel!
     @IBOutlet weak var albumName: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    
+    static let identifier = String(describing: AlbumsCollectionViewCell.self)
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

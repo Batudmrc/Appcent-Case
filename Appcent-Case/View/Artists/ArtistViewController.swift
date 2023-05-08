@@ -12,6 +12,8 @@ class ArtistViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     var genreId: Int?
     var genreName: String?
+    var artistName: String?
+    var artistId: String?
     
     var artists: [Datum] = []
     
@@ -26,7 +28,6 @@ class ArtistViewController: UIViewController {
         collectionView.register(UINib(nibName: CategoriesCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: CategoriesCollectionViewCell.identifier)
         
         fetchData()
-        print(genreId!)
         // Do any additional setup after loading the view.
     }
     
@@ -40,8 +41,8 @@ class ArtistViewController: UIViewController {
                 return
             }
             do {
-                let genre = try JSONDecoder().decode(Genre.self, from: data)
-                self?.artists = genre.data
+                let artist = try JSONDecoder().decode(Genre.self, from: data)
+                self?.artists = artist.data
                 
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
@@ -56,6 +57,8 @@ class ArtistViewController: UIViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let artist = artists[indexPath.item]
         let genreId = artist.id
+        artistId = String(artist.id)
+        print(artistId!)
         //genreName = category.name
         
         guard URL(string: "https://api.deezer.com/genre/\(genreId)/artists") != nil else {
@@ -66,10 +69,10 @@ class ArtistViewController: UIViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "artistVC" {
-            if let genreId = sender as? Int, let destinationVC = segue.destination as? ArtistViewController {
+            if let genreId = sender as? Int, let destinationVC = segue.destination as? AlbumsViewController {
                 // Pass the genre ID to the destination view controller
-                destinationVC.genreId = genreId
-                destinationVC.genreName = genreName
+                destinationVC.artistId = String(genreId)
+                destinationVC.artistName = artistName
             }
         }
     }
@@ -85,6 +88,4 @@ extension ArtistViewController: UICollectionViewDelegate,UICollectionViewDataSou
         cell.setup(category: artist)
         return cell
     }
-    
-    
 }
