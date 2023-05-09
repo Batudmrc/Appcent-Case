@@ -8,12 +8,14 @@
 import UIKit
 
 class ArtistViewController: UIViewController {
-
+    
+    
     @IBOutlet weak var collectionView: UICollectionView!
     var genreId: Int?
     var genreName: String?
     var artistName: String?
     var artistId: String?
+    var artistCoverBig: UIImage?
     
     var artists: [Datum] = []
     
@@ -62,6 +64,7 @@ class ArtistViewController: UIViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let artist = artists[indexPath.item]
         let genreId = artist.id
+        artistName = artist.name
         artistId = String(artist.id)
         
         guard URL(string: "https://api.deezer.com/genre/\(genreId)/artists") != nil else {
@@ -76,6 +79,7 @@ class ArtistViewController: UIViewController {
                 // Pass the genre ID to the destination view controller
                 destinationVC.artistId = String(genreId)
                 destinationVC.artistName = artistName
+                destinationVC.artistCoverBig = artistCoverBig
             }
         }
     }
@@ -100,3 +104,4 @@ extension ArtistViewController: UICollectionViewDelegate,UICollectionViewDataSou
             return CGSize(width: cellWidth, height: cellHeight)
         }
 }
+

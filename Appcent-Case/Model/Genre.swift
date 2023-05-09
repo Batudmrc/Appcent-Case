@@ -16,9 +16,10 @@ struct Datum: Codable {
     let id: Int
     let name: String
     let picture: String
+    let picture_big: String
 
     enum CodingKeys: String, CodingKey {
-        case id, name, picture
+        case id, name, picture,picture_big
     }
 }
 

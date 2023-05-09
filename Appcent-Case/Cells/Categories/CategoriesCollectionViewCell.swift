@@ -36,7 +36,6 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
         }
     }
 }
-
 struct CategoryList {
     var image: String?
     var name: String?

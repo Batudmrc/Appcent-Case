@@ -7,8 +7,11 @@
 
 import UIKit
 
-class AlbumsCollectionViewCell: UICollectionViewCell {
 
+class AlbumsCollectionViewCell: UICollectionViewCell {
+    
+
+    
     @IBOutlet weak var releaseDate: UILabel!
     @IBOutlet weak var albumName: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -36,7 +39,6 @@ class AlbumsCollectionViewCell: UICollectionViewCell {
         }
     }
 }
-
 struct AlbumList {
     var image: String?
     var name: String?
