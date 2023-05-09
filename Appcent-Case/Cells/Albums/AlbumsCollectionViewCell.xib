@@ -67,12 +67,11 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstItem="4oT-3S-aQb" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="07r-av-1aF"/>
                 <constraint firstItem="4oT-3S-aQb" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.961259" id="3Ih-hh-wRo"/>
                 <constraint firstAttribute="trailing" secondItem="4oT-3S-aQb" secondAttribute="trailing" constant="8" id="5kQ-UO-67W"/>
                 <constraint firstItem="4oT-3S-aQb" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.822222" id="5kT-pY-if6"/>
                 <constraint firstItem="4oT-3S-aQb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="60t-x6-b92"/>
-                <constraint firstItem="4oT-3S-aQb" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="bMv-nH-6p3"/>
-                <constraint firstAttribute="bottom" secondItem="4oT-3S-aQb" secondAttribute="bottom" constant="8" id="bae-FD-Rma"/>
             </constraints>
             <size key="customSize" width="413" height="90"/>
             <connections>

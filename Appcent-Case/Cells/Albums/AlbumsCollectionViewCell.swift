@@ -10,8 +10,6 @@ import UIKit
 
 class AlbumsCollectionViewCell: UICollectionViewCell {
     
-
-    
     @IBOutlet weak var releaseDate: UILabel!
     @IBOutlet weak var albumName: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -23,6 +21,7 @@ class AlbumsCollectionViewCell: UICollectionViewCell {
     }
     func setup(album: AlbumData) {
         self.albumName.text = album.title
+        self.releaseDate.text = album.releaseDate
         if let imageUrl = URL(string: album.cover) {
             let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
                 guard let data = data, error == nil else {

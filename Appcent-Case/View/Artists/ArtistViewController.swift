@@ -9,8 +9,8 @@ import UIKit
 
 class ArtistViewController: UIViewController {
     
-    
     @IBOutlet weak var collectionView: UICollectionView!
+
     var genreId: Int?
     var genreName: String?
     var artistName: String?
@@ -65,7 +65,6 @@ class ArtistViewController: UIViewController {
         let artist = artists[indexPath.item]
         let genreId = artist.id
         artistName = artist.name
-        artistId = String(artist.id)
         
         guard URL(string: "https://api.deezer.com/genre/\(genreId)/artists") != nil else {
             return

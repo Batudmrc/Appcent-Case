@@ -15,6 +15,8 @@ class AlbumsViewController: UIViewController {
     var artistId: String?
     var albums: [AlbumData] = []
     var artistCoverBig: UIImage?
+    var albumId: String?
+    var albumName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +57,6 @@ class AlbumsViewController: UIViewController {
         task.resume()
     }
     
-    
     func fetchCover() {
         guard let url = URL(string: "https://api.deezer.com/artist/\(artistId!)") else {
             return
@@ -83,7 +84,30 @@ class AlbumsViewController: UIViewController {
         }
         task.resume()
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let album = albums[indexPath.item]
+        let genreId = album.id
+        albumName = album.title
+        
+        
+        guard URL(string: "https://api.deezer.com/genre/\(genreId)/artists") != nil else {
+            return
+        }
+        performSegue(withIdentifier: "tracksVC", sender: genreId)
 
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "tracksVC" {
+            if let genreId = sender as? Int, let destinationVC = segue.destination as? TracksViewController {
+                // Pass the genre ID to the destination view controller
+                destinationVC.albumId = String(genreId)
+                destinationVC.albumName = albumName
+
+            }
+        }
+    }
+    
 }
 
 extension AlbumsViewController: UICollectionViewDelegate,UICollectionViewDataSource {
