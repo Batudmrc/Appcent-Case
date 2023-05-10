@@ -6,19 +6,21 @@
 //
 
 import UIKit
+import AVFoundation
+
 
 class TracksViewController: UIViewController {
-
-
+    
+    
     @IBOutlet weak var collectionView: UICollectionView!
     var albumId: String?
     var albumName: String?
     var tracks: [TrackData] = []
+    var audioPlayer: AVPlayer?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         self.title = albumName
         collectionView.dataSource = self
@@ -73,5 +75,17 @@ extension TracksViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height / 6)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let track = tracks[indexPath.item]
+        let previewURL = track.preview
+
+        guard let url = URL(string: previewURL) else {
+            return
+        }
+
+        let playerItem = AVPlayerItem(url: url)
+        audioPlayer = AVPlayer(playerItem: playerItem)
+        audioPlayer?.play()
+    }
     
 }
