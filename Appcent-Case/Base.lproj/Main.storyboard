@@ -182,17 +182,39 @@
             </objects>
             <point key="canvasLocation" x="4695" y="-27"/>
         </scene>
-        <!--View Controller-->
+        <!--Liked Tracks-->
         <scene sceneID="g54-zO-qLB">
             <objects>
-                <viewController id="daq-dd-Hs0" sceneMemberID="viewController">
+                <viewController id="daq-dd-Hs0" customClass="LikedTracksViewController" customModule="Appcent_Case" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="41r-JH-0z6">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SaF-gZ-Qde">
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Cde-2f-gWQ">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Tkk-oj-b2L"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="SaF-gZ-Qde" firstAttribute="trailing" secondItem="Tkk-oj-b2L" secondAttribute="trailing" id="JsQ-8e-lDy"/>
+                            <constraint firstItem="SaF-gZ-Qde" firstAttribute="top" secondItem="Tkk-oj-b2L" secondAttribute="top" id="bsH-o5-z82"/>
+                            <constraint firstItem="Tkk-oj-b2L" firstAttribute="bottom" secondItem="SaF-gZ-Qde" secondAttribute="bottom" id="upN-cO-w1V"/>
+                            <constraint firstItem="SaF-gZ-Qde" firstAttribute="leading" secondItem="Tkk-oj-b2L" secondAttribute="leading" id="y4S-uK-Q3j"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="0IX-NO-222"/>
+                    <navigationItem key="navigationItem" title="Liked Tracks" id="0IX-NO-222"/>
+                    <connections>
+                        <outlet property="collectionView" destination="SaF-gZ-Qde" id="Kde-Gf-6K6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lcE-7X-dD1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

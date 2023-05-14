@@ -17,22 +17,35 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    static var imageCache: NSCache<NSString, UIImage> = {
+        let cache = NSCache<NSString, UIImage>()
+        cache.countLimit = 100
+        return cache
+    }()
     
     func setup(category: Datum) {
         self.categoryLabel.text = category.name
         if let imageUrl = URL(string: category.picture) {
-            let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
-                guard let data = data, error == nil else {
-                    print("Error downloading image: \(error?.localizedDescription ?? "")")
-                    return
-                }
-                DispatchQueue.main.async {
-                    if let image = UIImage(data: data) {
-                        self.imageView.image = image
+            // Check if the image is available in the cache
+            if let cachedImage = CategoriesCollectionViewCell.imageCache.object(forKey: imageUrl.absoluteString as NSString) {
+                self.imageView.image = cachedImage
+            } else {
+                let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                    guard let data = data, error == nil else {
+                        print("Error downloading image: \(error?.localizedDescription ?? "")")
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        if let image = UIImage(data: data) {
+                            // Cache the downloaded image
+                            CategoriesCollectionViewCell.imageCache.setObject(image, forKey: imageUrl.absoluteString as NSString)
+                            
+                            self.imageView.image = image
+                        }
                     }
                 }
+                task.resume()
             }
-            task.resume()
         }
     }
 }

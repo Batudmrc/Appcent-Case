@@ -14,7 +14,7 @@ struct Track: Codable {
 }
 
 // MARK: - Datum
-struct TrackData: Codable {
+struct TrackData: Codable, Hashable {
     let id: Int
     let title, titleShort, titleVersion: String
     let link: String

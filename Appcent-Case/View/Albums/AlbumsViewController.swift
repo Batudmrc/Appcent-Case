@@ -17,6 +17,7 @@ class AlbumsViewController: UIViewController {
     var artistCoverBig: UIImage?
     var albumId: String?
     var albumName: String?
+    var albumCover: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,12 +85,11 @@ class AlbumsViewController: UIViewController {
         }
         task.resume()
     }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let album = albums[indexPath.item]
         let genreId = album.id
         albumName = album.title
-        
+        albumCover = album.cover
         
         guard URL(string: "https://api.deezer.com/genre/\(genreId)/artists") != nil else {
             return
@@ -103,7 +103,7 @@ class AlbumsViewController: UIViewController {
                 // Pass the genre ID to the destination view controller
                 destinationVC.albumId = String(genreId)
                 destinationVC.albumName = albumName
-
+                destinationVC.albumCover = albumCover
             }
         }
     }
