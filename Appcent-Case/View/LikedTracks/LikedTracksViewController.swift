@@ -33,6 +33,9 @@ class LikedTracksViewController: UIViewController {
         }
         collectionView.reloadData()
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        audioPlayer?.pause()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,6 +86,7 @@ extension LikedTracksViewController: UICollectionViewDelegate, UICollectionViewD
         cell.isLiked = likedTrackIDs.contains(track.id)
         cell.updateLikedImage()
         cell.setup(track: track,imageUrl: "https://api.deezer.com/album/\(String(describing: albumId))/image")
+        cell.setImage()
         cell.delegate = self
         return cell
     }
@@ -97,7 +101,19 @@ extension LikedTracksViewController: UICollectionViewDelegate, UICollectionViewD
             return
         }
         let playerItem = AVPlayerItem(url: url)
-        audioPlayer = AVPlayer(playerItem: playerItem)
-        audioPlayer?.play()
+        if let audioPlayer = audioPlayer {
+                if audioPlayer.rate != 0 && audioPlayer.error == nil {
+                    // Audio player is playing, pause it
+                    audioPlayer.pause()
+                } else {
+                    // Audio player is paused or stopped, start playing the selected track
+                    audioPlayer.replaceCurrentItem(with: playerItem)
+                    audioPlayer.play()
+                }
+            } else {
+                // No existing audio player, create a new one and start playing the selected track
+                audioPlayer = AVPlayer(playerItem: playerItem)
+                audioPlayer?.play()
+            }
     }
 }

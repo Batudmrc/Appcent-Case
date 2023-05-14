@@ -59,6 +59,10 @@ class TracksViewController: UIViewController {
         loadLikedTrackIDs()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        audioPlayer?.pause()
+    }
+    
     func fetchData() {
         guard let url = URL(string: "https://api.deezer.com/album/\(albumId!)/tracks") else {
             return

@@ -67,6 +67,9 @@ class TracksCollectionViewCell: UICollectionViewCell {
             }
         }
     }
+    func setImage() {
+        trackImage.image = UIImage(named: "play")
+    }
     func formatDuration(_ duration: Int) -> String {
         let minutes = duration / 60
         let seconds = duration % 60
