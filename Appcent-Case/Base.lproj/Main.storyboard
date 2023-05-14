@@ -239,12 +239,13 @@
             </objects>
             <point key="canvasLocation" x="125.95419847328243" y="-27.464788732394368"/>
         </scene>
-        <!--Item-->
+        <!--Discover-->
         <scene sceneID="BdT-g4-ys1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H4T-ZI-jhk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ddO-pv-jja">
-                        <imageReference key="selectedImage" image="music.note" catalog="system" symbolScale="default"/>
+                    <tabBarItem key="tabBarItem" title="Discover" id="ddO-pv-jja">
+                        <imageReference key="image" image="music.note" catalog="system" symbolScale="large"/>
+                        <imageReference key="selectedImage" image="music.note" catalog="system" symbolScale="large"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mqe-y1-KbG">
@@ -260,11 +261,14 @@
             </objects>
             <point key="canvasLocation" x="1052.6717557251909" y="-27.464788732394368"/>
         </scene>
-        <!--Item-->
+        <!--Favorites-->
         <scene sceneID="YHk-7C-Oam">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hev-nz-P45" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="heart" catalog="system" id="vHP-Vl-wuh"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" id="vHP-Vl-wuh">
+                        <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
+                        <imageReference key="selectedImage" image="heart" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qpE-Ea-7mo">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>

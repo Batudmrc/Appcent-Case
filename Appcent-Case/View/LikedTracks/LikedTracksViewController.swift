@@ -25,10 +25,7 @@ class LikedTracksViewController: UIViewController {
         loadLikedTrackIDs()
         if let savedData = UserDefaults.standard.object(forKey: "FetchedTrackData") as? Data {
             if let allTracks = try? JSONDecoder().decode([TrackData].self, from: savedData) {
-                // Filter the tracks based on the likedTrackIDs
                 tracks = allTracks.filter { likedTrackIDs.contains($0.id) }
-                print(tracks)
-                //print(tracks)
             }
         }
         collectionView.reloadData()
@@ -44,8 +41,6 @@ class LikedTracksViewController: UIViewController {
         collectionView.delegate = self
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(UINib(nibName: TracksCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: TracksCollectionViewCell.identifier)
-        //loadLikedTrackIDs()
-
     }
     
     func loadLikedTrackIDs() {
@@ -53,12 +48,10 @@ class LikedTracksViewController: UIViewController {
             likedTrackIDs = savedLikedTrackIDs
         }
     }
-    
     func saveLikedTrackIDs() {
         UserDefaults.standard.set(likedTrackIDs, forKey: likedTrackIDsKey)
     }
 }
-
 extension LikedTracksViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TracksCollectionViewCellDelegate {
     
     func didTapLikeButton(for cell: TracksCollectionViewCell, track: TrackData) {
@@ -103,15 +96,12 @@ extension LikedTracksViewController: UICollectionViewDelegate, UICollectionViewD
         let playerItem = AVPlayerItem(url: url)
         if let audioPlayer = audioPlayer {
                 if audioPlayer.rate != 0 && audioPlayer.error == nil {
-                    // Audio player is playing, pause it
                     audioPlayer.pause()
                 } else {
-                    // Audio player is paused or stopped, start playing the selected track
                     audioPlayer.replaceCurrentItem(with: playerItem)
                     audioPlayer.play()
                 }
             } else {
-                // No existing audio player, create a new one and start playing the selected track
                 audioPlayer = AVPlayer(playerItem: playerItem)
                 audioPlayer?.play()
             }

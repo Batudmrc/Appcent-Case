@@ -22,7 +22,6 @@ class TracksViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        print(tracks)
         
         if let savedData = UserDefaults.standard.data(forKey: "FetchedTrackData") {
             var savedTracks = (try? JSONDecoder().decode([TrackData].self, from: savedData)) ?? []
